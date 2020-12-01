@@ -28,12 +28,12 @@ MODEL_TARGET_DIR = os.path.join('fbprophet', 'stan_model')
 
 
 def get_backends_from_env() -> List[str]:
-    from fbprophet.models import StanBackendEnum
+    from backends.stan_backend import StanBackendEnum
     return os.environ.get("STAN_BACKEND", StanBackendEnum.PYSTAN.name).split(",")
 
 
 def build_models(target_dir):
-    from fbprophet.models import StanBackendEnum
+    from backends.stan_backend import StanBackendEnum
     for backend in get_backends_from_env():
         StanBackendEnum.get_backend_class(backend).build_model(target_dir, MODEL_DIR)
 
